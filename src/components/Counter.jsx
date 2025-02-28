@@ -1,35 +1,23 @@
 import { useState } from 'react';
 import { Bugfender } from '@bugfender/sdk';
 
-Bugfender.init({
-    appKey: '11PiQrGYJy4z5TVHtBjCNALqv6HiKx0i',
-    // overrideConsoleMethods: true,
-    // printToConsole: true,
-    // registerErrorHandler: true,
-    // logBrowserEvents: true,
-    // logUIEvents: true,
-    // version: '',
-    // build: '',
-});
-
-const Counter = () => {
+const Counter = ({ isLoggedIn }) => {
     const [count, setCount] = useState(0);
 
     const increment = () => {
-        Bugfender.info('Valor incrementado');
-        setCount(count + 1);
+        count < 10
+            ? (Bugfender.info('Valor incrementado'), setCount(count + 1))
+            : Bugfender.error('El contador ha llegado a su nivel maximo');
     };
+
     const decrement = () => {
-        Bugfender.info('Valor decrementado');
-        setCount(count - 1);
+        count > 0
+            ? (Bugfender.info('Valor decrementado'), setCount(count - 1))
+            : Bugfender.error('El contador ha llegado a su nivel mínimo');
     };
 
-    if (count >= 10) {
-        Bugfender.error('El contador ha llegado a su nivel maximo');
-    }
-
-    if (count < 0) {
-        Bugfender.error('El contador no puede pasar de 0');
+    if (!isLoggedIn) {
+        return <p>Please log in to use the counter.</p>;
     }
 
     return (
