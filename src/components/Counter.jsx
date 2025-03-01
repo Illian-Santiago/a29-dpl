@@ -23,8 +23,8 @@ const Counter = () => {
     }
 
     return (
-        <div className='flex flex-col items-center p-4 border rounded-lg shadow-lg w-64'>
-            <h2 className='text-xl font-bold mb-2'>Contador: {count}</h2>
+        <div className='flex flex-col items-center p-4 border rounded-lg shadow-lg w-64 bg-white'>
+            <h2 className='text-xl font-bold mb-2 text-gray-800'>Contador: {count}</h2>
 
             <div className='flex gap-4'>
                 <button className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700' onClick={incrementar}>+</button>
