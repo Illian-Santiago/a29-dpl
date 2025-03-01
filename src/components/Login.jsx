@@ -1,35 +1,25 @@
-import React, { useState } from 'react';
-import { Bugfender } from '@bugfender/sdk';
+import React, { useState } from 'react'
+import { Bugfender } from '@bugfender/sdk'
+import { useAppContext } from '../providers/Context'
 
-function Login({ setIsLoggedIn }) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const Login = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { setLogueado } = useAppContext()
 
-    const handleLogin = () => {
-        // Implement login logic here
-        Bugfender.log(`Logging in with username: ${username}`);
-        console.log('Logging in with', username, password);
-        setIsLoggedIn(true);
-    };
+    function loguearse() {
+        Bugfender.log(`Logueado con el email: ${email}`)
+        setLogueado(true)
+    }
 
     return (
         <div>
             <h2>Login</h2>
-            <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleLogin}>Login</button>
+            <input type="email" placeholder="nombre@ejemplo.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="password" placeholder="**********" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <button onClick={loguearse}>Iniciar sesión</button>
         </div>
-    );
+    )
 }
 
-export default Login;
+export default Login
